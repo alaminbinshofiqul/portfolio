@@ -1,0 +1,30 @@
+Project Name: Student Performance Evaluator System
+
+Project Overview:
+A web-based system that evaluates student performance using marks, GPA calculation, and result analysis. It helps teachers and students track academic performance efficiently.
+
+Key Features:
+- Automatic GPA calculation
+- Result analysis
+- Student login
+- Admin panel for managing results
+
+Technologies Used:
+- HTML
+- CSS
+- JavaScript
+- PHP
+- MySQL
+
+Project Files Included:
+1. report.pdf          --> Detailed project report
+2. slides.pptx         --> Presentation slides
+3. code.zip            --> Source code of the project
+4. demo.mp4            --> Project demo video
+5. project_info.txt    --> This file containing project information
+
+Instructions:
+- Open the report.pdf for detailed explanation and methodology.
+- Use slides.pptx for project presentation.
+- Extract code.zip to view and run the source code locally.
+- Watch demo.mp4 for a quick demonstration of the project functionality.
