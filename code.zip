@@ -1,0 +1,261 @@
+Shisir ETE, [1/22/2026 1:46 PM]
+// Smart Elevator System with 3 Floors
+// Ground Floor = 1, First Floor = 2, Second Floor = 3
+// Button wiring: +5V → Button → Arduino Pin → 10kΩ resistor → GND
+
+// Stepper Motor Pins (ULN2003 Driver)
+#define IN1 8
+#define IN2 9
+#define IN3 10
+#define IN4 11
+
+// Push Button Pins (with external pull-down resistors)
+#define BTN_GROUND 2   // Button 1 - Goes to Ground Floor (Display: 1)
+#define BTN_FIRST 3    // Button 2 - Goes to First Floor (Display: 2)
+#define BTN_SECOND 4   // Button 3 - Goes to Second Floor (Display: 3)
+
+// LED Pins
+#define LED_GROUND 5   // LED for Ground Floor
+#define LED_FIRST 6    // LED for First Floor
+#define LED_SECOND 7   // LED for Second Floor
+
+// Seven Segment Display Pins
+#define SEG_A A0
+#define SEG_B A1
+#define SEG_C A2
+#define SEG_D A3
+#define SEG_E A4
+#define SEG_F 12
+#define SEG_G A5
+
+// 8-step half-step sequence for 28BYJ-48 stepper motor
+int stepSequence[8][4] = {
+  {1, 0, 0, 0},
+  {1, 1, 0, 0},
+  {0, 1, 0, 0},
+  {0, 1, 1, 0},
+  {0, 0, 1, 0},
+  {0, 0, 1, 1},
+  {0, 0, 0, 1},
+  {1, 0, 0, 1}1
+};
+
+// Global variables
+int currentFloor = 1;      // Start at Floor 1 (Ground Floor)
+int targetFloor = 1;
+int stepDelay = 1;        // Slower for more torque when lifting weight
+int stepsPerFloor = 12576;  // Full rotation per floor
+int currentStep = 0;       // Track current step position
+
+void setup() {
+  // Initialize stepper motor pins
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  
+  // Initialize button pins as INPUT (using external pull-down resistors)
+  pinMode(BTN_GROUND, INPUT);
+  pinMode(BTN_FIRST, INPUT);
+  pinMode(BTN_SECOND, INPUT);
+  
+  // Initialize LED pins
+  pinMode(LED_GROUND, OUTPUT);
+  pinMode(LED_FIRST, OUTPUT);
+  pinMode(LED_SECOND, OUTPUT);
+  
+  // Initialize seven segment display pins
+  pinMode(SEG_A, OUTPUT);
+  pinMode(SEG_B, OUTPUT);
+  pinMode(SEG_C, OUTPUT);
+  pinMode(SEG_D, OUTPUT);
+  pinMode(SEG_E, OUTPUT);
+  pinMode(SEG_F, OUTPUT);
+  pinMode(SEG_G, OUTPUT);
+  
+  // Set initial display to Floor 1
+  updateDisplay(1);
+  updateLEDs(1);
+  
+  Serial.begin(9600);
+  Serial.println("==================================");
+  Serial.println("Smart Elevator System Ready");
+  Serial.println("==================================");
+  Serial.println("Currently at: Floor 1 (Ground Floor)");
+  Serial.println("Button 1 = Ground Floor (Display: 1)");
+  Serial.println("Button 2 = First Floor (Display: 2)");
+  Serial.println("Button 3 = Second Floor (Display: 3)");
+  Serial.println("");
+  Serial.println("MOTOR SETUP:");
+  Serial.println("- Each floor = 1 full rotation (2048 steps)");
+  Serial.println("- Attach 5-10g box to show lift movement");
+  Serial.println("- Use 5V power for motor (NOT 9V!)");
+  Serial.println("==================================");
+}
+
+Shisir ETE, [1/22/2026 1:46 PM]
+void loop() {
+  // Check button presses (buttons are active HIGH with pull-down resistors)
+  if (digitalRead(BTN_GROUND) == HIGH) {
+    targetFloor = 1;  // Ground floor
+    Serial.println("Button 1 pressed - Moving to Ground Floor");
+    delay(300); // Debounce
+    
+    // Only move if we're not already there
+    if (currentFloor != targetFloor) {
+      moveElevator(targetFloor);
+    } else {
+      Serial.println("Already at Ground Floor");
+    }
+  }
+  else if (digitalRead(BTN_FIRST) == HIGH) {
+    targetFloor = 2;  // First floor
+    Serial.println("Button 2 pressed - Moving to First Floor");
+    delay(300); // Debounce
+    
+    // Only move if we're not already there
+    if (currentFloor != targetFloor) {
+      moveElevator(targetFloor);
+    } else {
+      Serial.println("Already at First Floor");
+    }
+  }
+  else if (digitalRead(BTN_SECOND) == HIGH) {
+    targetFloor = 3;  // Second floor
+    Serial.println("Button 3 pressed - Moving to Second Floor");
+    delay(300); // Debounce
+    
+    // Only move if we're not already there
+    if (currentFloor != targetFloor) {
+      moveElevator(targetFloor);
+    } else {
+      Serial.println("Already at Second Floor");
+    }
+  }
+}
+void moveElevator(int target) {
+  Serial.print("Current floor: ");
+  Serial.println(currentFloor);
+  Serial.print("Target floor: ");
+  Serial.println(target);
+  
+  // Calculate total steps needed (direct movement, no stops)
+  int floorDifference = target - currentFloor;
+  int totalSteps = abs(floorDifference) * stepsPerFloor;
+  
+  if (floorDifference > 0) {
+    // Move UP directly to target floor
+    Serial.print("Moving UP directly to floor ");
+    Serial.println(target);
+    
+    moveStepsUp(totalSteps);
+    currentFloor = target;
+    updateDisplay(currentFloor);
+    updateLEDs(currentFloor);
+    
+    Serial.print("Arrived at floor ");
+    Serial.println(currentFloor);
+  }
+  else if (floorDifference < 0) {
+    // Move DOWN directly to target floor
+    Serial.print("Moving DOWN directly to floor ");
+    Serial.println(target);
+    
+    moveStepsDown(totalSteps);
+    currentFloor = target;
+    updateDisplay(currentFloor);
+    updateLEDs(currentFloor);
+    
+    Serial.print("Arrived at floor ");
+    Serial.println(currentFloor);
+  }
+  
+  Serial.println("Waiting for next button press...");
+}
+
+void moveStepsUp(int steps) {
+  // Rotate motor clockwise to move elevator UP
+  Serial.println("Motor rotating UP (clockwise)...");
+  for (int i = 0; i < steps; i++) {
+    digitalWrite(IN1, stepSequence[currentStep][0]);
+    digitalWrite(IN2, stepSequence[currentStep][1]);
+    digitalWrite(IN3, stepSequence[currentStep][2]);
+    digitalWrite(IN4, stepSequence[currentStep][3]);
+    
+    currentStep++;
+    if (currentStep >= 😍 currentStep = 0;
+    
+    delay(stepDelay);
+  }
+  stopMotor();
+  Serial.println("Motor stopped");
+}
+
+void moveStepsDown(int steps) {
+  // Rotate motor counter-clockwise to move elevator DOWN
+  Serial.println("Motor rotating DOWN (counter-clockwise)...");
+  for (int i = 0; i < steps; i++) {
+    digitalWrite(IN1, stepSequence[currentStep][0]);
+    digitalWrite(IN2, stepSequence[currentStep][1]);
+    digitalWrite(IN3, stepSequence[currentStep][2]);
+    digitalWrite(IN4, stepSequence[currentStep][3]);
+    
+    currentStep--;
+    if (currentStep < 0) currentStep = 7;
+    
+    delay(stepDelay);
+  }
+  stopMotor();
+  Serial.println("Motor stopped");
+}
+
+void stopMotor() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
+
+Shisir ETE, [1/22/2026 1:46 PM]
+void updateDisplay(int floor) {
+  // Display numbers 1, 2, or 3 on seven segment display
+  // COMMON CATHODE configuration (HIGH = ON, LOW = OFF)
+  switch(floor) {
+    case 1: // Display "1" (Ground Floor)
+      digitalWrite(SEG_A, LOW);
+      digitalWrite(SEG_B, HIGH);
+      digitalWrite(SEG_C, HIGH);
+      digitalWrite(SEG_D, LOW);
+      digitalWrite(SEG_E, LOW);
+      digitalWrite(SEG_F, LOW);
+      digitalWrite(SEG_G, LOW);
+      break;
+      
+    case 2: // Display "2" (First Floor)
+      digitalWrite(SEG_A, HIGH);
+      digitalWrite(SEG_B, HIGH);
+      digitalWrite(SEG_C, LOW);
+      digitalWrite(SEG_D, HIGH);
+      digitalWrite(SEG_E, HIGH);
+      digitalWrite(SEG_F, LOW);
+      digitalWrite(SEG_G, HIGH);
+      break;
+      
+    case 3: // Display "3" (Second Floor)
+      digitalWrite(SEG_A, HIGH);
+      digitalWrite(SEG_B, HIGH);
+      digitalWrite(SEG_C, HIGH);
+      digitalWrite(SEG_D, HIGH);
+      digitalWrite(SEG_E, LOW);
+      digitalWrite(SEG_F, LOW);
+      digitalWrite(SEG_G, HIGH);
+      break;
+  }
+}
+
+void updateLEDs(int floor) {
+  // Turn on LED for current floor, turn off others
+  digitalWrite(LED_GROUND, floor == 1 ? HIGH : LOW);
+  digitalWrite(LED_FIRST, floor == 2 ? HIGH : LOW);
+  digitalWrite(LED_SECOND, floor == 3 ? HIGH : LOW);
+}
