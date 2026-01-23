@@ -815,26 +815,58 @@
 
     <!-- Projects Section -->
     <section id="projects">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-tint"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Efficient Water Management System</h3>
-                        <p>Designed and implemented a smart water management system that optimizes water usage through sensor technology and automated controls. The project focuses on reducing water waste in both residential and agricultural applications.</p>
-                        <div class="project-links">
-                            <a href="#" class="btn btn-outline" id="projectDetails">Project Details</a>
-                            <a href="#" class="btn" id="projectDownload">Download Project</a>
-                        </div>
+
+        <!-- Projects Section -->
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Efficient Water Management System</h3>
+                    <p>
+                        Designed and implemented a smart water management system that optimizes water usage
+                        through sensor technology and automated controls. The project focuses on reducing
+                        water waste in both residential and agricultural applications.
+                    </p>
+                    <div class="project-links">
+                        <a href="project2/photos.pdf" class="btn btn-outline" id="projectDetails">Project Details</a>
+                        <a href="project2/Project_report_by_2108051.pdf" class="btn" id="projectDownload">Download Project</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
+            <!-- Project 2 (NEW – ADDED ONLY) -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-elevator"></i>
+                </div>
+                <div class="project-content">
+                    <h3>
+                        Design and Implementation of a Smart Elevator System Using Arduino Uno and Stepper Motor Control
+                    </h3>
+                    <p>
+                        Developed a smart elevator system using Arduino Uno and stepper motor control.
+                        The system allows floor selection using push buttons, displays floor numbers,
+                        and controls smooth elevator movement with safety logic.
+                    </p>
+                    <div class="project-links">
+                        <a href="projects/smart-elevator-report.pdf" class="btn btn-outline">Project Details</a>
+                        <a href="projects/smart-elevator-code.zip" class="btn">Download Project</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        
     <!-- Career Goals Section -->
     <section id="goals">
         <div class="container">
@@ -985,6 +1017,63 @@
             </div>
         </div>
     </div>
+
+    <!-- Evaluator Project Details Modal -->
+<div class="modal" id="projectModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeProjectModal">&times;</span>
+        <h2 class="modal-title">Student Performance Evaluator System</h2>
+
+        <h3>Project Overview</h3>
+        <p>
+            This project is designed to evaluate student performance automatically based on marks,
+            attendance, and assignments. It helps teachers and institutions analyze results quickly
+            and fairly using a digital system.
+        </p>
+
+        <h3>Key Features</h3>
+        <ul>
+            <li>Automatic calculation of grades and GPA</li>
+            <li>Student-wise result evaluation</li>
+            <li>Admin and student login system</li>
+            <li>Performance analysis with charts</li>
+            <li>Secure database storage</li>
+        </ul>
+
+        <h3>Technologies Used</h3>
+        <ul>
+            <li>HTML, CSS, JavaScript for frontend</li>
+            <li>PHP for backend logic</li>
+            <li>MySQL database for data storage</li>
+            <li>Chart.js for result visualization</li>
+        </ul>
+
+        <h3>Project Documentation</h3>
+        <div class="modal-downloads">
+            <div class="modal-download-item">
+                <i class="fas fa-file-pdf"></i>
+                <a href="#">Project Report (PDF)</a>
+            </div>
+            <div class="modal-download-item">
+                <i class="fas fa-file-powerpoint"></i>
+                <a href="#">Presentation Slides</a>
+            </div>
+            <div class="modal-download-item">
+                <i class="fas fa-code"></i>
+                <a href="#">Source Code</a>
+            </div>
+            <div class="modal-download-item">
+                <i class="fas fa-video"></i>
+                <a href="#">Project Demo Video</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="#" class="btn" id="fullProjectDownload">Download Complete Project</a>
+        </div>
+    </div>
+</div>
+
 
     <script>
         // Mobile Navigation Toggle
