@@ -366,6 +366,7 @@
         }
 
         /* Projects Section */
+        
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -813,60 +814,87 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+  <!-- Projects Section -->
     <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
 
-        <!-- Projects Section -->
-<section id="projects">
-    <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
+    <!-- Project 1: Water Management -->
+    <div class="project-card">
+        <div class="project-image">
+            <i class="fas fa-tint"></i>
+        </div>
+        <div class="project-content">
+            <h3>Efficient Water Management System</h3>
+            <p>Smart system to optimize water usage using sensors and automation.</p>
+            <div class="project-links">
+                <a href="javascript:void(0)" 
+   class="btn btn-outline projectDetailsBtn"
+   data-title="Efficient Water Management System"
+   data-overview="Smart system to reduce water waste using sensors."
+   data-features="Water monitoring,Auto irrigation,Leak detection"
+   data-tech="Arduino,C++,MATLAB"
+   data-report="projects/water-management/report.pdf"
+   data-slides="projects/water-management/slides.pptx"
+   data-code="projects/water-management/code.zip"
+   data-video="projects/water-management/demo.mp4">
+   Project Details
+</a>
 
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <i class="fas fa-tint"></i>
-                </div>
-                <div class="project-content">
-                    <h3>Efficient Water Management System</h3>
-                    <p>
-                        Designed and implemented a smart water management system that optimizes water usage
-                        through sensor technology and automated controls. The project focuses on reducing
-                        water waste in both residential and agricultural applications.
-                    </p>
-                    <div class="project-links">
-                        <a href="project2/photos.pdf" class="btn btn-outline" id="projectDetails">Project Details</a>
-                        <a href="project2/Project_report_by_2108051.pdf" class="btn" id="projectDownload">Download Project</a>
-                    </div>
-                </div>
+                <a href="javascript:void(0)" 
+   class="btn projectDownloadBtn"
+   data-report="projects/water-management/report.pdf"
+   data-slides="projects/water-management/slides.pptx"
+   data-code="projects/water-management/code.zip"
+   data-video="projects/water-management/demo.mp4">
+   Download Project
+</a>
+
             </div>
-
-            <!-- Project 2 (NEW – ADDED ONLY) -->
-            <div class="project-card">
-                <div class="project-image">
-                    <i class="fas fa-elevator"></i>
-                </div>
-                <div class="project-content">
-                    <h3>
-                        Design and Implementation of a Smart Elevator System Using Arduino Uno and Stepper Motor Control
-                    </h3>
-                    <p>
-                        Developed a smart elevator system using Arduino Uno and stepper motor control.
-                        The system allows floor selection using push buttons, displays floor numbers,
-                        and controls smooth elevator movement with safety logic.
-                    </p>
-                    <div class="project-links">
-                        <a href="projects/smart-elevator-report.pdf" class="btn btn-outline">Project Details</a>
-                        <a href="projects/smart-elevator-code.zip" class="btn">Download Project</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-</section>
 
-        
+    <!-- Project 2: Evaluator Project -->
+    <div class="project-card">
+        <div class="project-image">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="project-content">
+            <h3>Student Performance Evaluator System</h3>
+            <p>Automated system to evaluate student performance based on marks.</p>
+            <div class="project-links">
+                <a href="javascript:void(0)" class="btn btn-outline projectDetailsBtn"
+   data-title="Student Performance Evaluator System"
+   data-overview="Web-based system to evaluate student performance."
+   data-features="GPA calculation,Result analysis,Student login,Admin panel"
+   data-tech="HTML,CSS,JavaScript,PHP,MySQL"
+   data-report="projects/evaluator/report.pdf"
+   data-slides="projects/evaluator/slides.pptx"
+   data-code="projects/evaluator/code.zip"
+   data-video="projects/evaluator/demo.mp4">
+   Project Details
+</a>
+
+                <a href="javascript:void(0)" 
+   class="btn projectDownloadBtn"
+   data-report="projects/evaluator/report.pdf"
+   data-slides="projects/evaluator/slides.pptx"
+   data-code="projects/evaluator/code.zip"
+   data-video="projects/evaluator/demo.mp4">
+   Download Project
+</a>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+        </div>
+    </section>
+
+
     <!-- Career Goals Section -->
     <section id="goals">
         <div class="container">
@@ -966,59 +994,137 @@
     </footer>
 
     <!-- Project Details Modal -->
-    <div class="modal" id="projectModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeProjectModal">&times;</span>
-            <h2 class="modal-title">Efficient Water Management System</h2>
-            
-            <h3>Project Overview</h3>
-            <p>This project focuses on developing a smart water management system that utilizes sensor technology and automated controls to optimize water usage in both residential and agricultural settings. The system aims to significantly reduce water waste while maintaining optimal hydration for plants and efficient water distribution in households.</p>
-            
-            <h3>Key Features</h3>
-            <ul>
-                <li>Real-time water level monitoring using ultrasonic sensors</li>
-                <li>Automated irrigation control based on soil moisture data</li>
-                <li>Mobile application for remote monitoring and control</li>
-                <li>Data analytics for water usage patterns and optimization</li>
-                <li>Leak detection and alert system</li>
-            </ul>
-            
-            <h3>Technologies Used</h3>
-            <ul>
-                <li>Arduino microcontroller for system control</li>
-                <li>Various sensors (ultrasonic, moisture, flow)</li>
-                <li>C++ for embedded programming</li>
-                <li>MATLAB for data analysis</li>
-                <li>Mobile app development for user interface</li>
-            </ul>
-            
-            <h3>Project Documentation</h3>
-            <div class="modal-downloads">
-                <div class="modal-download-item">
-                    <i class="fas fa-file-pdf"></i>
-                    <a href="#">Project Report (PDF)</a>
-                </div>
-                <div class="modal-download-item">
-                    <i class="fas fa-file-powerpoint"></i>
-                    <a href="#">Presentation Slides</a>
-                </div>
-                <div class="modal-download-item">
-                    <i class="fas fa-code"></i>
-                    <a href="#">Source Code</a>
-                </div>
-                <div class="modal-download-item">
-                    <i class="fas fa-video"></i>
-                    <a href="#">Project Demo Video</a>
-                </div>
-            </div>
-            
-            <div style="margin-top: 30px; text-align: center;">
-                <a href="#" class="btn" id="fullProjectDownload">Download Complete Project</a>
-            </div>
-        </div>
+    <!-- Project Details Modal -->
+<div class="modal" id="projectModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeProjectModal">&times;</span>
+
+        <!-- STEP 3 START -->
+        <h2 class="modal-title" id="modalTitle"></h2>
+
+        <h3>Project Overview</h3>
+        <p id="modalOverview"></p>
+
+        <h3>Key Features</h3>
+        <ul id="modalFeatures"></ul>
+
+        <h3>Technologies Used</h3>
+        <ul id="modalTech"></ul>
+
+        <h3>Project Files</h3>
+<div class="modal-downloads">
+    <a href="" id="reportLink" target="_blank">📄 Project Report</a><br>
+    <a href="" id="slidesLink" target="_blank">📊 Presentation Slides</a><br>
+    <a href="" id="codeLink" download>💻 Source Code</a><br>
+    <a href="" id="videoLink" target="_blank">🎥 Demo Video</a>
+</div>
+
+        <!-- STEP 3 END -->
+
     </div>
+</div>
+
 
     <script>
+
+        // Download all project files at once
+document.querySelectorAll(".projectDownloadBtn").forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.preventDefault();
+
+        const files = [
+            btn.dataset.report,
+            btn.dataset.slides,
+            btn.dataset.code,
+            btn.dataset.video
+        ];
+
+        files.forEach(file => {
+            const a = document.createElement('a');
+            a.href = file;
+            a.download = file.split('/').pop();
+            a.target = "_blank";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+    });
+});
+
+
+        // Download all project files at once
+document.querySelectorAll(".projectDownloadBtn").forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.preventDefault();
+
+        // Array of all file links
+        const files = [
+            btn.dataset.report,
+            btn.dataset.slides,
+            btn.dataset.code,
+            btn.dataset.video
+        ];
+
+        // Trigger download for each file
+        files.forEach(file => {
+            const a = document.createElement('a');
+            a.href = file;
+            a.download = file.split('/').pop(); // filename
+            a.target = "_blank"; // optional: open in new tab for non-zip/pdf
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+    });
+});
+
+
+        const modal = document.getElementById("projectModal");
+const closeBtn = document.getElementById("closeProjectModal");
+
+const modalTitle = document.getElementById("modalTitle");
+const modalOverview = document.getElementById("modalOverview");
+const modalFeatures = document.getElementById("modalFeatures");
+const modalTech = document.getElementById("modalTech");
+
+const reportLink = document.getElementById("reportLink");
+const slidesLink = document.getElementById("slidesLink");
+const codeLink = document.getElementById("codeLink");
+const videoLink = document.getElementById("videoLink");
+
+document.querySelectorAll(".projectDetailsBtn").forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.preventDefault();
+
+        modalTitle.textContent = btn.dataset.title;
+        modalOverview.textContent = btn.dataset.overview;
+
+        modalFeatures.innerHTML = "";
+        btn.dataset.features.split(",").forEach(f => {
+            modalFeatures.innerHTML += `<li>${f}</li>`;
+        });
+
+        modalTech.innerHTML = "";
+        btn.dataset.tech.split(",").forEach(t => {
+            modalTech.innerHTML += `<li>${t}</li>`;
+        });
+
+        // File links
+        reportLink.href = btn.dataset.report;
+        slidesLink.href = btn.dataset.slides;
+        codeLink.href = btn.dataset.code;
+        videoLink.href = btn.dataset.video;
+
+        modal.style.display = "block";
+    });
+});
+
+closeBtn.onclick = () => modal.style.display = "none";
+
+window.onclick = e => {
+    if (e.target === modal) modal.style.display = "none";
+};
+
         // Mobile Navigation Toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
@@ -1080,37 +1186,9 @@
             alert('Certificate download would start here.');
         });
 
-        // Project Details Modal
-        const projectModal = document.getElementById('projectModal');
-        const projectDetailsBtn = document.getElementById('projectDetails');
-        const closeProjectModal = document.getElementById('closeProjectModal');
-        const projectDownloadBtn = document.getElementById('projectDownload');
-        const fullProjectDownloadBtn = document.getElementById('fullProjectDownload');
+        
 
-        projectDetailsBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            projectModal.style.display = 'block';
-        });
-
-        closeProjectModal.addEventListener('click', function() {
-            projectModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function(e) {
-            if (e.target === projectModal) {
-                projectModal.style.display = 'none';
-            }
-        });
-
-        projectDownloadBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Project download would start here. In a real implementation, this would link to your project files.');
-        });
-
-        fullProjectDownloadBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Complete project download would start here.');
-        });
+        
     </script>
 </body>
 </html>
